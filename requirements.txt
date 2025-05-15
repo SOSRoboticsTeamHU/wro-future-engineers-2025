@@ -1,0 +1,6 @@
+opencv-python
+numpy
+rplidar
+adafruit-circuitpython-servokit
+pyserial
+SDK for the lidar
