@@ -1,1 +1,11 @@
-# Global configuration parameters
+MOTOR_PWM_PIN = 18
+MOTOR_DIR_PIN = 23
+SERVO_PIN = 17
+
+FRONT_CAM_STREAM = "http://192.168.1.101:81/stream"
+REAR_CAM_STREAM = "http://192.168.1.102:81/stream"
+
+LIDAR_PORT = "/dev/ttyUSB0"
+LIDAR_DEADZONE_START = 150
+LIDAR_DEADZONE_END = 210
+
