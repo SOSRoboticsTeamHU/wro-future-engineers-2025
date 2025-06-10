@@ -11,7 +11,10 @@ def make_decision(camera_data, lidar_data):
     }
     """
     if camera_data['parking_detected']:
-        return { 'speed': 0.0, 'steering': 0.0 }  # stop in parking zone
+        if lidar_data['obstacle_ahead'] and lidar_data['obstacle_distance'] < 0.3:
+            return {'steering_angle': 0.0, 'speed': 0.0}
+        else:
+            return {'steering_angle': 0.0, 'speed': 0.2}
 
     if camera_data['pole_color'] == 'red':
         return { 'speed': 0.4, 'steering': 0.5 }  # steer right
