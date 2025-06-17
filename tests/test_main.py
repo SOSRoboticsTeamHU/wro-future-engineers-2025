@@ -5,16 +5,15 @@ from utils.timer import Timer
 from camera.camera_module import get_camera_data
 from lidar.lidar_module import LidarProcessor
 from planning.decision_module import make_decision
-from control.motor_control import set_motor, set_steering, stop, cleanup
 
-def main_loop():
-    log("Robotvezérlés indul...")
+def test_main_loop():
+    log("TESZT: Vezérlési ciklus indul (motorok NEM aktívak)")
     lidar = LidarProcessor()
     timer = Timer()
-    loop_delay = 0.2  # 5 Hz ciklus (0.2 mp)
+    loop_delay = 0.5  # 2 Hz tesztciklus
 
     try:
-        while True:
+        for i in range(10):  # 10 ciklus erejéig fusson
             # 1. Szenzoradatok beolvasása
             camera_data = get_camera_data()
             scan = lidar.get_scan_data()
@@ -23,24 +22,16 @@ def main_loop():
             # 2. Döntéshozatal
             action = make_decision(camera_data, lidar_data)
 
-            # 3. Végrehajtás
-            set_motor(action['speed'])
-            set_steering(action['steering'])
-
-            # 4. Log
+            # 3. Csak logoljuk, nem vezérelünk
             log(f"[CAM] {camera_data} | [LIDAR] {lidar_data}")
-            log(f"[ACTION] Speed={action['speed']} Steering={action['steering']}")
-
-            # 5. Várakozás a következő ciklusig
+            log(f"[DECISION] Speed={action['speed']} Steering={action['steering']}")
             time.sleep(loop_delay)
 
     except KeyboardInterrupt:
         log("Leállítás (Ctrl+C)")
     finally:
-        stop()
-        cleanup()
         lidar.stop()
-        log("Rendszer leállítva")
+        log("LiDAR leállítva")
 
 if __name__ == "__main__":
-    main_loop()
+    test_main_loop()
