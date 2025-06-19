@@ -3,7 +3,7 @@ from utils.logger import log
 import time
 
 def test_camera_streams():
-    log("📷 CAMTEST: kamera stream teszt indul...")
+    log("CAMTEST: kamera stream teszt indul...")
     
     try:
         for i in range(10):  # 10 mintavétel
@@ -13,11 +13,11 @@ def test_camera_streams():
             time.sleep(0.5)
 
     except KeyboardInterrupt:
-        log("🛑 CAMTEST megszakítva (Ctrl+C)")
+        log("CAMTEST megszakítva (Ctrl+C)")
     except Exception as e:
         log(f"⚠️ Hiba: {e}")
 
-    log("✅ CAMTEST kész.")
+    log("CAMTEST kész.")
 
 if __name__ == "__main__":
     test_camera_streams()
