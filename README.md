@@ -1,50 +1,100 @@
-# 🤖 WRO Future Engineers 2025 – Autonomous Robot System
+WRO 2025 Future Engineers Robot Project 🚗🤖
+============================================
 
-This repository contains the full software stack for our WRO 2025 Future Engineers autonomous RC car, built on **Raspberry Pi 5** with a **360° LiDAR**, dual **ESP32-CAM** modules, and **HuskyLens UART** vision.
+Overview
+--------
 
----
+This repository contains the software and documentation for an autonomous robot developed for the WRO 2025 Future Engineers competition. The robot utilizes a YDLiDAR X4 for 360° obstacle avoidance and a HuskyLens for advanced color detection, all integrated into an RC car body with custom 3D-printed parts.
 
-## 🧠 Features
+Key Features
+------------
 
-- ✅ **ROS 2 Jazzy-based LIDAR obstacle avoidance**
-- 🎨 **Color detection with HuskyLens over UART**
-  - 🔴 Red = turn right
-  - 🟢 Green = turn left
-- 🚗 **Motor and steering control via GPIO**
-- 🔁 Auto-launch system on boot (via `systemd`)
-- 🛠️ Modular code structure for maintainability
+*   **360° LiDAR-based Obstacle Avoidance:**
+    
+    *   YDLiDAR X4 sensor
+        
+    *   ROS 2 Jazzy distribution for reliable, real-time operation
+        
+*   **Advanced Color Detection:**
+    
+    *   HuskyLens for rapid color recognition
+        
+    *   Effective decision-making based on color inputs
+        
+*   **Motor and Servo Control:**
+    
+    *   GPIO-based motor control for forward/reverse movement
+        
+    *   Servo-based precision steering control
+        
+*   **Mechanical Design:**
+    
+    *   Custom RC car chassis integration
+        
+    *   3D-printed mounts and brackets
+        
+*   **Autonomous Startup:**
+    
+    *   Automated system startup via systemd on Raspberry Pi
+        
 
----
+Repository Structure
+--------------------
 
-## 🛠 Hardware Overview
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   wro_robot/  ├── control/  │   ├── decision_logic.py  │   ├── motor_controller.py  │   ├── steering_controller.py  │   └── huskylens_module.py  ├── scripts/  │   └── start_robot.sh  ├── system/  │   ├── wro_robot.service  │   └── ydlidar.service  ├── ROS/  │   └── YDLIDAR_ws/  │       └── src/  │           └── lidar_driver/  ├── models/                    # 3D printable STL files  ├── docs/  │   ├── setup_guide.md  │   └── troubleshooting.md  ├── LICENSE  └── README.md   `
 
-Component	Details
-- 🧠 Controller	Raspberry Pi 5
-- 🛰️ Sensors	YDLidar X4, 2x ESP32-CAM, HuskyLens
-- 🔋 Power	External battery
-- 🛞 Drive	1x DC Motor (H-Bridge) + Servo
-- 🧰 GPIO Pins	Motor: GPIO 32, 33 / Servo: GPIO 12
-- 🧪 Platform	ROS 2 Jazzy + Python 3.12
-- 🧪 Modes of Operation
+Getting Started
+---------------
 
-1️⃣ Round 1 – LIDAR-only obstacle avoidance
-2️⃣ Round 2 – HuskyLens color override + LIDAR
+### Hardware Requirements
 
-## 🧩 External Dependencies
+*   Raspberry Pi 5 with Ubuntu 24.04 LTS
+    
+*   YDLiDAR X4
+    
+*   HuskyLens sensor
+    
+*   RC car chassis
+    
+*   3D-printed mounting parts (see models/)
+    
+*   Servo motor for steering
+    
+*   GPIO Motor controller
+    
 
-huskytools Python package for UART HuskyLens
-gpiozero, RPi.GPIO for hardware control
-ROS 2 Jazzy runtime (manages /scan topic for LIDAR)
+### Software Installation
 
----
+1.  git clone
+    
+2.  sudo apt updatesudo apt install ros-jazzy-desktop python3-gpiozero python3-opencvpip install -r requirements.txt
+    
+3.  cd ROS/YDLIDAR\_wscolcon build
+    
+4.  sudo cp system/\*.service /etc/systemd/system/sudo systemctl enable wro\_robot.service ydlidar.service
+    
+5.  sudo reboot
+    
 
-## 📸 Sample Output (on boot)
+Documentation
+-------------
 
-✅ Decision node started: HuskyLens on /dev/ttyAMA0 + 360° LIDAR.
-📡 front: 0.34 m | left: 0.55 m | right: inf
-🟢 Path clear → Move forward
-📘 License
+*   [Setup Guide](docs/setup_guide.md)
+    
+*   [Troubleshooting Guide](docs/troubleshooting.md)
+    
 
-MIT License – free to use, modify, and distribute.
+Contribution
+------------
 
-Made with ❤️ by the WRO Future Engineers SOS Robotics Team – 2025
+Contributions are welcome! Fork the repository and submit pull requests with enhancements or fixes.
+
+License
+-------
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+Authors
+-------
+
+*   [Zsombor Kukucska](https://github.com/SOSRoboticsTeamHU)
