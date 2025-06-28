@@ -1,46 +1,28 @@
+from control.motor_controller import MotorController
+from control.steering_controller import SteeringController
+from control.decision_logic import make_decision  # ezt majd írjuk
 import time
-from utils.logger import log
-from utils.timer import Timer
 
-from camera.camera_module import get_camera_data
-from lidar.lidar_module import LidarProcessor
-from planning.decision_module import make_decision
-from control.motor_control import set_motor, set_steering, stop, cleanup
+motor = MotorController()
+steering = SteeringController()
 
-def main_loop():
-    log("Robotvezérlés indul...")
-    lidar = LidarProcessor()
-    timer = Timer()
-    loop_delay = 0.2  # 5 Hz ciklus (0.2 mp)
+while True:
+    decision = make_decision()  # pl. "GO", "TURN LEFT", stb.
 
-    try:
-        while True:
-            # 1. Szenzoradatok beolvasása
-            camera_data = get_camera_data()
-            scan = lidar.get_scan_data()
-            lidar_data = lidar.find_clear_path(scan)
+    if decision == "GO":
+        motor.forward()
+        steering.center()
+    elif decision == "TURN LEFT":
+        motor.forward()
+        steering.turn(-30)
+    elif decision == "TURN RIGHT":
+        motor.forward()
+        steering.turn(30)
+    elif decision == "REVERSE":
+        motor.backward()
+        steering.center()
+    else:
+        motor.stop()
+        steering.center()
 
-            # 2. Döntéshozatal
-            action = make_decision(camera_data, lidar_data)
-
-            # 3. Végrehajtás
-            set_motor(action['speed'])
-            set_steering(action['steering'])
-
-            # 4. Log
-            log(f"[CAM] {camera_data} | [LIDAR] {lidar_data}")
-            log(f"[ACTION] Speed={action['speed']} Steering={action['steering']}")
-
-            # 5. Várakozás a következő ciklusig
-            time.sleep(loop_delay)
-
-    except KeyboardInterrupt:
-        log("Leállítás (Ctrl+C)")
-    finally:
-        stop()
-        cleanup()
-        lidar.stop()
-        log("Rendszer leállítva")
-
-if __name__ == "__main__":
-    main_loop()
+    time.sleep(0.1)

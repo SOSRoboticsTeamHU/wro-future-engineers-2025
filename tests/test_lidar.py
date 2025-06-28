@@ -1,15 +1,22 @@
-from lidar.lidar_module import LidarProcessor
-from utils.logger import log
-import time
+import rclpy
+from lidar.lidar_processor import LidarProcessor
 
-lidar = LidarProcessor()
+def main():
+    rclpy.init()
+    node = LidarProcessor()
 
-try:
-    for i in range(5):  # 5 szkennelés
-        scan = lidar.get_scan_data()
-        result = lidar.find_clear_path(scan)
-        log(f"Scan {i+1}: {result}")
-        time.sleep(0.5)
-finally:
-    lidar.stop()
-    log("LiDAR leállítva.")
+    try:
+        while rclpy.ok():
+            rclpy.spin_once(node, timeout_sec=0.1)
+            front = node.get_sector_distance(350, 10)
+            left = node.get_sector_distance(80, 100)
+            right = node.get_sector_distance(260, 280)
+            print(f"🌐 ront: {front:.2f}m  |  Left: {left:.2f}m  |  Right: {right:.2f}m")
+    except KeyboardInterrupt:
+        pass
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
