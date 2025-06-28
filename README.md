@@ -6,32 +6,6 @@ This repository contains the complete codebase for our self-driving RC car devel
 
 ---
 
-## 📦 Project Structure
-
-wro_robot/
-├── camera/
-│ ├── init.py
-│ └── camera_module.py # Handles front/rear camera color detection
-├── control/
-│ ├── init.py
-│ ├── motor_controller.py # Motor control (PWM GPIO)
-│ ├── steering_controller.py # Servo-based steering control
-│ └── decision_logic.py # Main logic (LIDAR-based obstacle avoidance + camera handling)
-├── lidar/
-│ ├── init.py
-│ └── lidar_test_node.py # ROS 2 listener node for /scan topic
-├── planning/
-│ └── init.py # (reserved for future logic)
-├── config.py # Centralized GPIO configuration
-├── main.py # Optional CLI entry point
-└── tests/
-├── test_motor.py
-├── test_steering.py
-└── test_lidar_listener.py
-
-
----
-
 ## 🚘 Core Functionalities
 
 | Round | Behavior |
