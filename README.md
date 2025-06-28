@@ -1,53 +1,50 @@
-# 🤖 WRO Future Engineers 2025 — Autonomous RC Car
+# 🤖 WRO Future Engineers 2025 – Autonomous Robot System
 
-This repository contains the complete codebase for our self-driving RC car developed for the **WRO Future Engineers 2025** competition. The robot is built using a Raspberry Pi 5, a 360° LiDAR (YDLidar X4), dual camera streams (ESP32-CAM), and GPIO-based control for the motor and steering systems.
-
----
-
-## 🚘 Core Functionalities
-
-| Round | Behavior |
-|-------|----------|
-| **1** | LiDAR-based 360° obstacle avoidance |
-| **2** | LiDAR navigation + color-based direction adjustment (red = pass right, green = pass left) |
-| **3** | Upon detecting **magenta**, stop and simulate parking |
+This repository contains the full software stack for our WRO 2025 Future Engineers autonomous RC car, built on **Raspberry Pi 5** with a **360° LiDAR**, dual **ESP32-CAM** modules, and **HuskyLens UART** vision.
 
 ---
 
-## 🧠 Technologies
+## 🧠 Features
 
-- **Language:** Python 3.12
-- **Robot OS:** ROS 2 Jazzy (for LiDAR integration)
-- **LiDAR:** YDLidar X4 (ROS 2 `/scan` topic)
-- **Camera:** ESP32-CAM with WiFi MJPEG stream
-- **Motor/Servo Control:** `gpiozero`, no pigpio
-- **GPIO Pins:**
-  - Motor: GPIO 12 (forward), GPIO 13 (backward)
-  - Servo: GPIO 4 (steering)
+- ✅ **ROS 2 Jazzy-based LIDAR obstacle avoidance**
+- 🎨 **Color detection with HuskyLens over UART**
+  - 🔴 Red = turn right
+  - 🟢 Green = turn left
+- 🚗 **Motor and steering control via GPIO**
+- 🔁 Auto-launch system on boot (via `systemd`)
+- 🛠️ Modular code structure for maintainability
 
-## 📁 Structure
-- `camera/`: vision processing
-- `lidar/`: obstacle detection
-- `control/`: PID and motion control
-- `planning/`: decision logic
-- `utils/`: logging and tools
+---
 
-## 📦 Requirements
-See `requirements.txt` for Python libraries.
+## 🛠 Hardware Overview
 
-## 🛠️ Setup
-1. Clone the repository
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-3. Run the main program:
-```bash
-python main.py
-```
+Component	Details
+- 🧠 Controller	Raspberry Pi 5
+- 🛰️ Sensors	YDLidar X4, 2x ESP32-CAM, HuskyLens
+- 🔋 Power	External battery
+- 🛞 Drive	1x DC Motor (H-Bridge) + Servo
+- 🧰 GPIO Pins	Motor: GPIO 32, 33 / Servo: GPIO 12
+- 🧪 Platform	ROS 2 Jazzy + Python 3.12
+- 🧪 Modes of Operation
 
-## 📸 Media
-Check the `media/` folder for videos and pictures of the robot in action.
+1️⃣ Round 1 – LIDAR-only obstacle avoidance
+2️⃣ Round 2 – HuskyLens color override + LIDAR
 
-## ⚙️ License
-MIT License
+## 🧩 External Dependencies
+
+huskytools Python package for UART HuskyLens
+gpiozero, RPi.GPIO for hardware control
+ROS 2 Jazzy runtime (manages /scan topic for LIDAR)
+
+---
+
+## 📸 Sample Output (on boot)
+
+✅ Decision node started: HuskyLens on /dev/ttyAMA0 + 360° LIDAR.
+📡 front: 0.34 m | left: 0.55 m | right: inf
+🟢 Path clear → Move forward
+📘 License
+
+MIT License – free to use, modify, and distribute.
+
+Made with ❤️ by the WRO Future Engineers SOS Robotics Team – 2025
