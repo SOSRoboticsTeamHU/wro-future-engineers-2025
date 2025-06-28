@@ -36,12 +36,6 @@ Key Features
 *   **Autonomous Startup:**
     
     *   Automated system startup via systemd on Raspberry Pi
-        
-
-Repository Structure
---------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   wro_robot/  ├── control/  │   ├── decision_logic.py  │   ├── motor_controller.py  │   ├── steering_controller.py  │   └── huskylens_module.py  ├── scripts/  │   └── start_robot.sh  ├── system/  │   ├── wro_robot.service  │   └── ydlidar.service  ├── ROS/  │   └── YDLIDAR_ws/  │       └── src/  │           └── lidar_driver/  ├── models/                    # 3D printable STL files  ├── docs/  │   ├── setup_guide.md  │   └── troubleshooting.md  ├── LICENSE  └── README.md   `
 
 Getting Started
 ---------------
