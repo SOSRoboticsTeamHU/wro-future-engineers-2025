@@ -1,5 +1,3 @@
-# WRO 2025 – Future Engineers Autonomous Car
-
 # 🤖 WRO Future Engineers 2025 — Autonomous RC Car
 
 This repository contains the complete codebase for our self-driving RC car developed for the **WRO Future Engineers 2025** competition. The robot is built using a Raspberry Pi 5, a 360° LiDAR (YDLidar X4), dual camera streams (ESP32-CAM), and GPIO-based control for the motor and steering systems.
